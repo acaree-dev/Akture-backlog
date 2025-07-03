@@ -58,8 +58,7 @@ user experience:
   created
 - **🏆 Competitive Advantage**: Players return to locations where they can
   purchase memories or save and share it on all social media platforms.
-- **🛡️ Enhanced Security**: Camera systems provide added security at better
-  costs
+- **🛡️ Enhanced Security**: Camera systems provide added security.
 - **⚡ Simple Implementation**: Easy system for guest video purchases or
   subscription members.
 
@@ -73,26 +72,8 @@ user experience:
 ### Installation
 
 1. Install dependencies:
-```bash
-npm install
-# or
-yarn install
-# or
-pnpm install
-```
 
-2. Run the development server:
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-3. Open [http://localhost:3000](http://localhost:3000) to view the application.
+2. Open [http://localhost:3000](http://localhost:3000) to view the application.
 
 ## 📁 Project Structure
 
