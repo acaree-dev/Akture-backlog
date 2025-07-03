@@ -54,8 +54,14 @@ user experience:
 
 ### For Venues
 
-- **💰 Novel Income Source**: Generate new revenue streams from every memory
-  created
+- \*\* 📣 Promoting Your Facility: Add value to your sports complex—whether it's
+  a pickleball court, soccer field, softball diamond, or basketball court—by
+  offering Akture live streaming. Parents can watch or record their loved ones
+  in real time, coaches can observe and review athletes during practice, and
+  friends or players can capture and share memorable moments. The recorded
+  footage can also be repurposed for promotional content and marketing your
+  facility.
+
 - **🏆 Competitive Advantage**: Players return to locations where they can
   purchase memories or save and share it on all social media platforms.
 - **🛡️ Enhanced Security**: Camera systems provide added security.
