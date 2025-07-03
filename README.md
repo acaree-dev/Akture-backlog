@@ -54,13 +54,10 @@ user experience:
 
 ### For Venues
 
-- \*\* 📣 Promoting Your Facility: Add value to your sports complex—whether it's
-  a pickleball court, soccer field, softball diamond, or basketball court—by
-  offering Akture live streaming. Parents can watch or record their loved ones
-  in real time, coaches can observe and review athletes during practice, and
-  friends or players can capture and share memorable moments. The recorded
-  footage can also be repurposed for promotional content and marketing your
-  facility.
+- **📣 Promote Your Facility**: Boost your sports venue—pickleball, soccer,
+  softball, or basketball—with Akture live streaming. Parents can watch or
+  record games, coaches can review practices, and players can capture and share
+  moments. Use the footage to market and promote your facility.
 
 - **🏆 Competitive Advantage**: Players return to locations where they can
   purchase memories or save and share it on all social media platforms.
