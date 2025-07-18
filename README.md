@@ -113,10 +113,9 @@ bun dev
 akture/
 ├── src/
 │   ├── app/                 # Next.js App Router
-│   │   ├── layout.tsx       # Root layout
+│   │   ├── layout.tsx       # Root layout with Akture branding
 │   │   ├── page.tsx         # Home page
-│   │   ├── globals.css      # Global styles
-│   │   └── favicon.ico      # Site favicon
+│   │   └── globals.css      # Global styles
 │   ├── components/          # Reusable UI components (ready for future use)
 │   ├── sections/            # Page sections and major components
 │   │   ├── AktureCarousel.tsx # Main hero carousel with sports images
@@ -139,6 +138,7 @@ akture/
 │       ├── social-*.svg     # Social media icons
 │       └── [other assets]   # Various UI icons and images
 ├── public/                  # Public static files
+│   └── favicon.svg          # Akture logo favicon
 ├── tailwind.config.ts       # Tailwind CSS configuration with custom animations
 ├── next.config.mjs          # Next.js configuration
 ├── tsconfig.json           # TypeScript configuration

@@ -17,6 +17,11 @@ const teko = Teko({
 export const metadata: Metadata = {
   title: "Akture - sports and actions live streaming",
   description: "Akture - sports and actions live streaming",
+  icons: {
+    icon: "/favicon.svg",
+    shortcut: "/favicon.svg",
+    apple: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({
