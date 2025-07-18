@@ -74,9 +74,38 @@ user experience:
 
 ### Installation
 
-1. Install dependencies:
+1. Clone the repository:
 
-2. Open [http://localhost:3000](http://localhost:3000) to view the application.
+```bash
+git clone https://github.com/Max-Aref/Akture.git
+cd Akture
+```
+
+2. Install dependencies:
+
+```bash
+npm install
+# or
+yarn install
+# or
+pnpm install
+# or
+bun install
+```
+
+3. Start the development server:
+
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
+
+4. Open [http://localhost:3000](http://localhost:3000) to view the application.
 
 ## 📁 Project Structure
 
@@ -86,31 +115,85 @@ akture/
 │   ├── app/                 # Next.js App Router
 │   │   ├── layout.tsx       # Root layout
 │   │   ├── page.tsx         # Home page
-│   │   └── globals.css      # Global styles
-│   ├── components/          # Reusable UI components
-│   ├── sections/            # Page sections
-│   │   ├── Header.tsx
-│   │   ├── Hero.tsx
-│   │   ├── Features.tsx
-│   │   ├── Testimonials.tsx
-│   │   ├── CallToAction.tsx
-│   │   └── Footer.tsx
-│   └── assets/              # Static assets
+│   │   ├── globals.css      # Global styles
+│   │   └── favicon.ico      # Site favicon
+│   ├── components/          # Reusable UI components (ready for future use)
+│   ├── sections/            # Page sections and major components
+│   │   ├── AktureCarousel.tsx # Main hero carousel with sports images
+│   │   ├── Header.tsx       # Navigation header with glassmorphism
+│   │   ├── TrendingPromo.tsx # Marquee promotional banner
+│   │   ├── Hero.tsx         # Hero section
+│   │   ├── Features.tsx     # Features showcase
+│   │   ├── Testimonials.tsx # Customer testimonials
+│   │   ├── CallToAction.tsx # Call-to-action section
+│   │   ├── LogoTicker.tsx   # Brand logos ticker
+│   │   └── Footer.tsx       # Site footer
+│   └── assets/              # Static assets and images
+│       ├── Akture-logo.svg  # Main Akture logo
+│       ├── carousel-images/ # Carousel background images
+│       ├── pickleball1.jpg  # Pickleball promotional images
+│       ├── pickleball2.jpg
+│       ├── button-bg.jpg    # Button background texture
+│       ├── avatar-*.png     # User avatar placeholders
+│       ├── logo-*.png       # Partner/brand logos
+│       ├── social-*.svg     # Social media icons
+│       └── [other assets]   # Various UI icons and images
 ├── public/                  # Public static files
-│   └── assets/lottie/       # Lottie animation files
-├── tailwind.config.ts       # Tailwind CSS configuration
+├── tailwind.config.ts       # Tailwind CSS configuration with custom animations
 ├── next.config.mjs          # Next.js configuration
-└── tsconfig.json           # TypeScript configuration
+├── tsconfig.json           # TypeScript configuration
+└── package.json            # Project dependencies and scripts
 ```
+
+## 🎥 Key Components
+
+### AktureCarousel
+
+The main hero carousel component featuring:
+
+- **4 Sports Slides**: Basketball, pickleball, soccer, and softball imagery
+- **Auto-play**: 6-second intervals with smooth transitions
+- **Interactive Controls**: Navigation arrows, slide indicators, and pause/play
+- **Touch Support**: Swipe gestures for mobile devices
+- **Accessibility**: Full keyboard navigation and ARIA labels
+
+### Header
+
+Navigation component with:
+
+- **Glassmorphism Design**: Modern frosted glass effect
+- **Responsive Layout**: Mobile-friendly with collapsible menu
+- **Akture Branding**: Logo integration and brand colors
+
+### TrendingPromo
+
+Promotional banner featuring:
+
+- **Marquee Animation**: Smooth infinite scrolling text
+- **Brand Messaging**: Key value propositions for athletes and venues
+- **Custom Timing**: 150-second animation cycle
 
 ## 🎨 Design Features
 
 - **Responsive Design**: Mobile-first approach with optimized breakpoints
-- **Modern Animations**: Smooth Lottie animations and Framer Motion effects
+  (375px, 768px, 1200px)
+- **Modern Animations**: Custom Tailwind animations including marquee scrolling
+  and carousel transitions
+- **Hero Carousel**: Full-screen interactive carousel featuring basketball,
+  pickleball, soccer, and softball
+- **Glassmorphism Effects**: Modern glass-like design elements in navigation
+  header
+- **Marquee Animations**: Smooth scrolling promotional banners with infinite
+  loop
+- **Sports-Focused Imagery**: High-quality sports photography optimized for web
+  performance
 - **Performance Optimized**: Image optimization, lazy loading, and code
-  splitting
-- **Accessibility**: WCAG compliant with semantic HTML and proper ARIA labels
+  splitting with Next.js
+- **Accessibility**: WCAG compliant with semantic HTML, ARIA labels, and
+  keyboard navigation
 - **SEO Optimized**: Meta tags, structured data, and optimized Core Web Vitals
+- **Touch-Friendly**: Mobile-optimized with swipe gestures and responsive
+  controls
 
 ## 📱 Responsive Breakpoints
 
