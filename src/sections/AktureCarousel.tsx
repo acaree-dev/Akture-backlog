@@ -347,8 +347,8 @@ const AktureCarousel = () => {
         ))}
       </div>
 
-      {/* Progress Bar */}
-      <div className='absolute bottom-0 left-0 w-full h-1 bg-gray-300 z-30'>
+      {/* Progress Bar - Temporarily disabled for future reuse */}
+      {/* <div className='absolute bottom-0 left-0 w-full h-1 bg-gray-300 z-30'>
         <div
           className='h-full bg-black transition-all duration-75 ease-linear'
           style={{
@@ -356,7 +356,7 @@ const AktureCarousel = () => {
             animation: isAutoPlaying ? "progress 6s linear infinite" : "none",
           }}
         />
-      </div>
+      </div> */}
 
       {/* Auto-play Control */}
       <button
@@ -375,7 +375,9 @@ const AktureCarousel = () => {
         )}
       </button>
 
-      <style jsx>{`
+      {/* TODO: Restore progress bar CSS animation when needed */}
+      {/* Progress Bar Animation Styles - Temporarily disabled */}
+      {/* <style jsx>{`
         @keyframes progress {
           from {
             width: 0%;
@@ -384,7 +386,7 @@ const AktureCarousel = () => {
             width: 100%;
           }
         }
-      `}</style>
+      `}</style> */}
     </div>
   );
 };
