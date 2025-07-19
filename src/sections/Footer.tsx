@@ -16,15 +16,33 @@ const Footer = () => {
   const navigationSections = [
     {
       title: "Platform",
-      links: ["Live Streaming", "Video on Demand", "Monetization", "Analytics"],
+      links: [
+        "Live Streaming",
+        "Video on Demand",
+        "Monetization",
+        "Analytics",
+        "Purchase",
+      ],
     },
     {
       title: "Company",
-      links: ["About Us", "Careers", "Sponsorship", "Partnership"],
+      links: [
+        "About Us",
+        "Careers",
+        "Sponsorship",
+        "Partnership",
+        "Contact Us",
+      ],
     },
     {
       title: "Support",
-      links: ["Disclaimer", "Contact Us", "Privacy Policy", "Terms of Service"],
+      links: [
+        "Disclaimer",
+        "Privacy Policy",
+        "Terms of Service",
+        "Cookies Policy",
+        "Return Policy",
+      ],
     },
   ];
 
