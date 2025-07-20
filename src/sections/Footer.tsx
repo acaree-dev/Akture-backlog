@@ -8,8 +8,6 @@ import {
   FaLinkedinIn,
 } from "react-icons/fa6";
 import Link from "next/link";
-import Image from "next/image";
-import logo from "@/assets/banner_blackred.png";
 
 const Footer = () => {
   // Navigation sections data structure for cleaner rendering
@@ -101,14 +99,21 @@ const Footer = () => {
                 href='/'
                 className='inline-block mb-4 md:mb-6 md:self-start'
               >
-                <Image
-                  src={logo}
-                  alt='Akture Logo'
-                  className='h-[5rem] w-auto'
-                  height={80}
-                  width={250}
-                  priority
-                />
+                <video
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload='auto'
+                  className='h-[10rem] w-auto'
+                  aria-label='Akture Logo'
+                >
+                  <source
+                    src='/assets/videos/animatedLogo.mp4'
+                    type='video/mp4'
+                  />
+                  Your browser does not support the video tag.
+                </video>
               </Link>
               <p className='text-gray-600 text-base leading-relaxed max-w-[280px]'>
                 Experience sports like never before. Join the revolution in live
