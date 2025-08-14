@@ -10,9 +10,8 @@ const DownloadApp = () => {
         <div className='max-w-4xl mx-auto text-center'>
           {/* Main headline */}
           <h2 className='text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 tracking-wide'>
-            Soon Download{" "}
-            <span className='text-red-600 font-extrabold'>Akture</span> Video
-            App
+            Download <span className='text-red-600 font-extrabold'>Akture</span>{" "}
+            Video App Soon
           </h2>
 
           {/* Subheadline */}
@@ -21,7 +20,7 @@ const DownloadApp = () => {
           </p>
 
           {/* Platform icons */}
-          <div className='flex justify-center items-center gap-16 opacity-60'>
+          <div className='flex justify-center items-center gap-8 opacity-60'>
             <div className='flex flex-col items-center gap-2'>
               <FaAndroid className='text-4xl md:text-5xl text-green-500' />
               <span className='text-sm text-gray-400 font-medium'>Android</span>

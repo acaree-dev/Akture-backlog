@@ -1,7 +1,8 @@
 import { Header } from "@/sections/Header";
 import TrendingPromo from "@/sections/TrendingPromo";
 import AktureCarousel from "@/sections/AktureCarousel";
-import DownloadApp from "@/sections/DownloadApp"; // Add this import
+import VideoShowcase from "@/sections/VideoShowcase"; // Add this import
+import DownloadApp from "@/sections/DownloadApp";
 import Footer from "@/sections/Footer";
 
 export default function Home() {
@@ -11,7 +12,8 @@ export default function Home() {
         <TrendingPromo />
         <Header />
         <AktureCarousel />
-        <DownloadApp /> {/* Add this component before Footer */}
+        <VideoShowcase /> {/* Add this component above DownloadApp */}
+        <DownloadApp />
         <div className='mt-auto'>
           <Footer />
         </div>
