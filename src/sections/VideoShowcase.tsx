@@ -59,7 +59,7 @@ const VideoShowcase = () => {
         <div className='max-w-6xl mx-auto'>
           {/* Header content */}
           <div className='text-center mb-12'>
-            <h2 className='text-3xl md:text-4xl lg:text-6xl font-bold text-black mb-4 tracking-wide'>
+            <h2 className='text-4xl md:text-5xl lg:text-6xl font-bold text-black mb-4 tracking-wide'>
               See <span className='text-red-600 font-extrabold'>Akture</span> in
               Action
             </h2>
