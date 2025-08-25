@@ -7,7 +7,7 @@ const VideoShowcase = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  // Video frame data - replace with actual video thumbnails later
+  // Video frame data
   const videoFrames = [
     {
       id: 1,
@@ -101,32 +101,33 @@ const VideoShowcase = () => {
   };
 
   return (
-    <section className='relative py-8 xs:py-10 sm:py-12 md:py-16 lg:py-20 xl:py-24 bg-white border-t border-gray-100 overflow-hidden'>
-      <div className='px-1 xs:px-2 sm:px-3 md:px-4 lg:px-6 xl:px-8'>
+    <section className='relative py-12 sm:py-16 md:py-20 bg-white border-t border-gray-100 overflow-hidden'>
+      {/* Main container with responsive padding */}
+      <div className='px-3 sm:px-4 md:px-6 lg:px-8'>
         {/* Header content */}
-        <div className='text-center mb-6 xs:mb-7 sm:mb-8 md:mb-10 lg:mb-12'>
-          <h2 className='text-xl xs:text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-black mb-3 xs:mb-4 sm:mb-5 md:mb-6 tracking-wide'>
+        <div className='text-center mb-8 md:mb-12'>
+          <h2 className='text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-black mb-4 md:mb-6 tracking-wide'>
             See <span className='text-red-600 font-extrabold'>Akture</span> in
             Action
           </h2>
-          <p className='text-sm xs:text-base sm:text-lg md:text-xl text-gray-600 leading-relaxed max-w-xs xs:max-w-sm sm:max-w-md md:max-w-lg lg:max-w-2xl mx-auto px-2 xs:px-3 sm:px-4'>
+          <p className='text-base sm:text-lg md:text-xl text-gray-600 leading-relaxed max-w-2xl mx-auto'>
             Preview the speed, simplicity, and connection of the Akture Video
             App.
           </p>
         </div>
 
-        {/* Carousel container - optimized for all mobile views */}
-        <div className='w-[95%] xs:w-[92%] sm:w-[90%] md:w-[90%] lg:w-[90%] xl:w-[90%] mx-auto'>
+        {/* Carousel container - 93% width of viewport */}
+        <div className='w-[93%] mx-auto'>
           <div className='relative flex items-center justify-center'>
-            {/* Left arrow */}
+            {/* Left arrow - positioned relative to the carousel */}
             <button
               onClick={() => scroll("left")}
               disabled={currentIndex === 0}
-              className='absolute left-0 xs:left-1 sm:left-2 md:left-3 lg:left-4 top-1/2 -translate-y-1/2 z-10 bg-white hover:bg-black text-black hover:text-white p-1.5 xs:p-2 sm:p-2.5 md:p-3 rounded-full shadow-lg transition-all duration-200 border border-gray-200 disabled:opacity-50 disabled:cursor-not-allowed'
+              className='absolute -left-4 sm:-left-5 md:-left-6 top-1/2 -translate-y-1/2 z-10 bg-white hover:bg-black text-black hover:text-white p-2 sm:p-3 rounded-full shadow-lg transition-all duration-200 border border-gray-200 disabled:opacity-50 disabled:cursor-not-allowed'
               aria-label='Previous videos'
             >
               <svg
-                className='w-3 h-3 xs:w-3.5 xs:h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5'
+                className='w-4 h-4 sm:w-5 sm:h-5'
                 fill='none'
                 stroke='currentColor'
                 viewBox='0 0 24 24'
@@ -140,12 +141,13 @@ const VideoShowcase = () => {
               </svg>
             </button>
 
-            {/* Carousel content container - responsive padding */}
-            <div className='flex-1 flex justify-center px-6 xs:px-7 sm:px-8 md:px-10 lg:px-12 xl:px-16 overflow-hidden'>
-              <div className='grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-0.5 xs:gap-1 sm:gap-1.5 md:gap-2 lg:gap-3 w-full max-w-full'>
+            {/* Carousel content container */}
+            <div className='flex-1 flex justify-center overflow-hidden px-2 sm:px-4 md:px-6'>
+              {/* Responsive grid layout */}
+              <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-3 md:gap-4 w-full'>
                 {getCurrentFrames().map((frame) => (
                   <div key={frame.id} className='cursor-pointer group'>
-                    <div className='relative h-16 xs:h-18 sm:h-20 md:h-24 lg:h-32 xl:h-36 2xl:h-40 bg-black rounded-sm xs:rounded sm:rounded-md md:rounded-lg overflow-hidden shadow-md sm:shadow-lg'>
+                    <div className='relative h-24 sm:h-32 md:h-36 lg:h-40 bg-black rounded-lg overflow-hidden shadow-lg'>
                       <Image
                         src={frame.thumbnail}
                         alt={frame.title}
@@ -158,11 +160,11 @@ const VideoShowcase = () => {
 
                       {/* Overlay */}
                       <div className='absolute inset-0 bg-black/40 group-hover:bg-black/30 transition-all duration-300'>
-                        {/* Play button - responsive sizing */}
+                        {/* Play button */}
                         <div className='absolute inset-0 flex items-center justify-center'>
-                          <div className='w-4 h-4 xs:w-5 xs:h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 xl:w-12 xl:h-12 bg-red-600 hover:bg-red-700 rounded-full flex items-center justify-center transition-all duration-200 group-hover:scale-110'>
+                          <div className='w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-red-600 hover:bg-red-700 rounded-full flex items-center justify-center transition-all duration-200 group-hover:scale-110'>
                             <svg
-                              className='w-1.5 h-1.5 xs:w-2 xs:h-2 sm:w-2.5 sm:h-2.5 md:w-3 md:h-3 lg:w-4 lg:h-4 xl:w-5 xl:h-5 text-white ml-0.5'
+                              className='w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 text-white ml-0.5'
                               fill='currentColor'
                               viewBox='0 0 24 24'
                             >
@@ -171,9 +173,9 @@ const VideoShowcase = () => {
                           </div>
                         </div>
 
-                        {/* Video info - conditional display based on screen size */}
-                        <div className='absolute bottom-0.5 xs:bottom-1 left-0.5 xs:left-1 text-white'>
-                          <h3 className='font-medium xs:font-semibold text-xs xs:text-xs sm:text-sm mb-0 truncate'>
+                        {/* Video info with responsive text sizing */}
+                        <div className='absolute bottom-1 left-1 text-white'>
+                          <h3 className='font-semibold text-xs sm:text-sm mb-0 truncate'>
                             {frame.title}
                           </h3>
                           <p className='text-xs text-gray-200 truncate hidden sm:block'>
@@ -187,15 +189,15 @@ const VideoShowcase = () => {
               </div>
             </div>
 
-            {/* Right arrow */}
+            {/* Right arrow - positioned relative to the carousel */}
             <button
               onClick={() => scroll("right")}
               disabled={currentIndex === totalPages - 1}
-              className='absolute right-0 xs:right-1 sm:right-2 md:right-3 lg:right-4 top-1/2 -translate-y-1/2 z-10 bg-white hover:bg-black text-black hover:text-white p-1.5 xs:p-2 sm:p-2.5 md:p-3 rounded-full shadow-lg transition-all duration-200 border border-gray-200 disabled:opacity-50 disabled:cursor-not-allowed'
+              className='absolute -right-4 sm:-right-5 md:-right-6 top-1/2 -translate-y-1/2 z-10 bg-white hover:bg-black text-black hover:text-white p-2 sm:p-3 rounded-full shadow-lg transition-all duration-200 border border-gray-200 disabled:opacity-50 disabled:cursor-not-allowed'
               aria-label='Next videos'
             >
               <svg
-                className='w-3 h-3 xs:w-3.5 xs:h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5'
+                className='w-4 h-4 sm:w-5 sm:h-5'
                 fill='none'
                 stroke='currentColor'
                 viewBox='0 0 24 24'

@@ -28,7 +28,7 @@ const DownloadApp = () => {
               aria-label='Download on the App Store'
             >
               <div className='mr-4'>
-                <FaApple className='text-3xl' />
+                <FaApple className='text-3xl text-gray-500' />
               </div>
               <div className='text-left'>
                 <div className='text-xs text-gray-300 leading-tight'>
