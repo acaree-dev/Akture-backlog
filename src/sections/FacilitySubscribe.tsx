@@ -60,7 +60,7 @@ const FacilitySubscribe = () => {
               </div>
               <p className='text-gray-600'>
                 Advanced booking systems and dynamic pricing that maximize your
-                facility&#39;s utilization and profitability.
+                facility&apos;s utilization and profitability.
               </p>
             </div>
 

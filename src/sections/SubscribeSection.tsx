@@ -32,7 +32,7 @@ const SubscribeSection = () => {
           </h2>
           <p className='text-lg text-gray-600 mb-12 max-w-2xl mx-auto'>
             Join thousands of sports enthusiasts who are already transforming
-            their game with Akture's premium features and exclusive content.
+            their game with Akture&#39;s premium features and exclusive content.
           </p>
 
           {/* Benefits Grid */}

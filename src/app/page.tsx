@@ -8,6 +8,7 @@ import FacilitySubscribe from "@/sections/FacilitySubscribe";
 import VpOwner from "@/sections/VpCoach";
 import VpCoach from "@/sections/VpCoach";
 import VpAthlete from "@/sections/VpAthlete";
+import SubscribeSection from "@/sections/SubscribeSection";
 
 export default function Home() {
   return (
@@ -18,10 +19,12 @@ export default function Home() {
         <AktureCarousel />
         <VpCoach />
         <VpAthlete />
+        <SubscribeSection />
         <VideoShowcase /> {/* Add this component above DownloadApp */}
         <DownloadApp />
         <div className='mt-auto'>
           <FacilitySubscribe />
+
           <Footer />
         </div>
       </div>
