@@ -56,8 +56,7 @@ const slides: CarouselSlide[] = [
   },
   {
     id: 4,
-    image:
-      "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=1920&h=1080&fit=crop&crop=center&auto=format&q=80",
+    image: "/assets/athlete01.png",
     badge: "COMING SOON",
     badgeColor: "red",
     title: "SHARE YOUR HIGHLIGHTS",

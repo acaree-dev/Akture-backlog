@@ -1,4 +1,4 @@
-import { FaApple, FaGooglePlay } from "react-icons/fa6";
+import Image from "next/image";
 
 const DownloadApp = () => {
   return (
@@ -7,64 +7,72 @@ const DownloadApp = () => {
       <div className='absolute inset-0 bg-gradient-to-b from-transparent via-black/50 to-transparent'></div>
 
       <div className='container mx-auto px-4 relative z-10'>
-        <div className='max-w-4xl mx-auto text-center'>
-          {/* Main headline */}
-          <h2 className='text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 tracking-wide'>
-            Download <span className='text-red-600 font-extrabold'>Akture</span>{" "}
-            Video App Soon
-          </h2>
+        <div className='grid grid-cols-1 lg:grid-cols-2 gap-12 items-center'>
+          {/* Left Content */}
+          <div className='text-center lg:text-left'>
+            <h2 className='text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-0 tracking-wide'>
+              Download{" "}
+              <span className='text-red-600 font-extrabold'>Akture</span> Video
+              App Soon
+            </h2>
 
-          {/* Subheadline */}
-          <p className='text-xl md:text-2xl text-gray-300 mb-12 leading-relaxed'>
-            Available for Android and iPhones
-          </p>
+            <p className='text-xl md:text-2xl text-gray-300 mb-12 leading-relaxed'>
+              Available for Android and iPhones
+            </p>
 
-          {/* Download Buttons */}
-          <div className='flex flex-col sm:flex-row justify-center items-center gap-6 mb-8'>
-            {/* App Store Button */}
-            <a
-              href='#'
-              className='inline-flex items-center bg-black hover:bg-blue-600 text-white px-6 py-4 rounded-xl transition-all duration-700 transform hover:scale-105 shadow-xl border border-gray-600 min-w-[200px]'
-              aria-label='Download on the App Store'
-            >
-              <div className='mr-4'>
-                <FaApple className='text-3xl text-gray-500' />
-              </div>
-              <div className='text-left'>
-                <div className='text-xs text-gray-300 leading-tight'>
-                  Download on the
-                </div>
-                <div className='text-lg font-semibold leading-tight'>
-                  App Store
-                </div>
-              </div>
-            </a>
+            <div className='flex flex-col md:flex-row justify-between lg:justify-start items-center gap-6 '>
+              {/* App Store Button */}
+              <a
+                href='#'
+                className='inline-block transform hover:scale-105 transition-all duration-700'
+                aria-label='Get it on Google Play'
+              >
+                <Image
+                  src='/assets/apple-store-badge1.svg'
+                  alt='Download on the App Store'
+                  width={200}
+                  height={72}
+                  className='w-auto '
+                  priority
+                />
+              </a>
 
-            {/* Google Play Button */}
-            <a
-              href='#'
-              className='inline-flex items-center bg-black hover:bg-blue-600 text-white px-6 py-4 rounded-xl transition-all duration-700 transform hover:scale-105 shadow-xl border border-gray-600 min-w-[200px]'
-              aria-label='Get it on Google Play'
-            >
-              <div className='mr-4'>
-                <FaGooglePlay className='text-3xl text-green-500' />
-              </div>
-              <div className='text-left'>
-                <div className='text-xs text-gray-300 leading-tight'>
-                  Get it on
+              {/* Google Play Badge */}
+              <a
+                href='#'
+                className='inline-block transform hover:scale-105 transition-all duration-700'
+                aria-label='Get it on Google Play'
+              >
+                <Image
+                  src='/assets/google-play-badge.svg'
+                  alt='Get it on Google Play'
+                  width={200}
+                  height={72}
+                  className='w-auto h-[60px] sm:h-[77px] md:h-[72px]'
+                  priority
+                />
+              </a>
+            </div>
+          </div>
+
+          {/* Right Phone Mockup */}
+          <div className='relative lg:h-[600px] hidden lg:block mb-4'>
+            <div className='absolute inset-0 flex items-center justify-center'>
+              <div className='relative transform rotate-6 hover:rotate-0 transition-transform duration-500'>
+                <div className='w-[200px] h-[450px]  rounded-[2.5rem] p-2 shadow-2xl'>
+                  <Image
+                    src='/assets/mockup18.png'
+                    alt='Akture App Preview'
+                    fill
+                    className='object-cover rounded-[2rem]'
+                    priority
+                  />
                 </div>
-                <div className='text-lg font-semibold leading-tight'>
-                  Google Play
-                </div>
               </div>
-            </a>
+            </div>
           </div>
         </div>
       </div>
-
-      {/* Decorative elements */}
-      <div className='absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent'></div>
-      <div className='absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent'></div>
     </section>
   );
 };

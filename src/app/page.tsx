@@ -4,6 +4,9 @@ import AktureCarousel from "@/sections/AktureCarousel";
 import VideoShowcase from "@/sections/VideoShowcase"; // Add this import
 import DownloadApp from "@/sections/DownloadApp";
 import Footer from "@/sections/Footer";
+import FacilitySubscribe from "@/sections/FacilitySubscribe";
+import VpOwner from "@/sections/VpCoach";
+import VpCoach from "@/sections/VpCoach";
 
 export default function Home() {
   return (
@@ -12,9 +15,11 @@ export default function Home() {
         <TrendingPromo />
         <Header />
         <AktureCarousel />
+        <VpCoach />
         <VideoShowcase /> {/* Add this component above DownloadApp */}
         <DownloadApp />
         <div className='mt-auto'>
+          <FacilitySubscribe />
           <Footer />
         </div>
       </div>

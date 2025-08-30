@@ -92,7 +92,7 @@ const Footer = () => {
 
   return (
     <footer className='relative overflow-hidden bg-white text-black border-t border-gray-100'>
-      <div className='relative z-10'>
+      <div className='relative z-10 border-t border-gray-400 pt-2 max-w-7xl mx-auto'>
         <div className='container mx-auto px-4'>
           <div className='flex flex-col space-y-8 md:grid md:grid-cols-2 lg:grid-cols-12 md:gap-6 lg:gap-12 md:space-y-0 py-6 md:py-10'>
             {/* Logo and Description */}
