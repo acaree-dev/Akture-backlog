@@ -37,7 +37,7 @@ const VpCoach = () => {
   ];
 
   return (
-    <section className='relative bg-white py-20 w-full overflow-hidden mt-[15rem] mb-[18rem]'>
+    <section className='relative bg-white py-20 w-full overflow-hidden mt-[10rem] mb-[10rem]'>
       {/* Changed container width and padding */}
       <div className='w-[90%] mx-auto'>
         {/* Updated grid to ensure exact 50% width distribution */}

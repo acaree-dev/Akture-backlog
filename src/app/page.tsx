@@ -7,6 +7,7 @@ import Footer from "@/sections/Footer";
 import FacilitySubscribe from "@/sections/FacilitySubscribe";
 import VpOwner from "@/sections/VpCoach";
 import VpCoach from "@/sections/VpCoach";
+import VpAthlete from "@/sections/VpAthlete";
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
         <Header />
         <AktureCarousel />
         <VpCoach />
+        <VpAthlete />
         <VideoShowcase /> {/* Add this component above DownloadApp */}
         <DownloadApp />
         <div className='mt-auto'>

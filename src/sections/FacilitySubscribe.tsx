@@ -16,7 +16,7 @@ const FacilitySubscribe = () => {
   return (
     <section
       id='facility-owners-subscribe'
-      className='relative py-16 md:py-24 lg:py-32 bg-gradient-to-b from-white to-gray-50 overflow-hidden mt-[15rem] mb-[18rem]'
+      className='relative py-16 md:py-24 lg:py-32 bg-gradient-to-b from-white to-gray-50 overflow-hidden  mb-[10rem]'
     >
       {/* Background accent elements */}
       <div className='absolute top-0 right-0 w-64 h-64 bg-red-600/5 rounded-full -translate-y-1/2 translate-x-1/2'></div>
