@@ -217,7 +217,7 @@ const AktureCarousel = () => {
                     {/* Badge */}
                     {slide.badge && (
                       <div
-                        className={`inline-block px-3 py-1 text-xs font-bold rounded-full mb-4 ${getBadgeStyles(
+                        className={`inline-block px-3 py-1 text-md font-bold rounded-full tracking-widest mb-4 ${getBadgeStyles(
                           slide.badgeColor || "red"
                         )}`}
                       >
@@ -227,7 +227,7 @@ const AktureCarousel = () => {
 
                     {/* Discount Banner */}
                     {slide.discount && (
-                      <div className='text-orange-600 text-sm font-semibold mb-2 tracking-wide'>
+                      <div className='text-orange-600 text-sm font-normal mb-2 tracking-widest'>
                         {slide.discount}
                       </div>
                     )}
@@ -239,7 +239,7 @@ const AktureCarousel = () => {
 
                     {/* Subtitle */}
                     {slide.subtitle && (
-                      <p className='text-lg sm:text-xl text-black mb-6 leading-relaxed'>
+                      <p className='text-lg sm:text-xl text-black mb-6 leading-relaxed tracking-wider'>
                         {slide.subtitle}
                       </p>
                     )}
@@ -261,7 +261,7 @@ const AktureCarousel = () => {
                     {/* CTAs */}
                     <div className='flex flex-col sm:flex-row gap-4'>
                       <button
-                        className='bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2'
+                        className='bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 md:px-8 md:py-4 rounded-lg font-normal md:font-semibold text-lg transition-colors duration-200 focus:outline-none focus:ring-2 tracking-widest focus:ring-blue-500 focus:ring-offset-2'
                         onClick={() => window.open(slide.ctaLink, "_self")}
                       >
                         {slide.ctaText}
@@ -269,7 +269,7 @@ const AktureCarousel = () => {
 
                       {slide.learnMoreLink && (
                         <button
-                          className='border-2 border-black text-black hover:bg-black hover:text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2'
+                          className='border-2 border-black text-black hover:bg-black hover:text-white px-4 py-2 rounded-lg font-semibold text-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 tracking-widest'
                           onClick={() =>
                             window.open(slide.learnMoreLink, "_self")
                           }

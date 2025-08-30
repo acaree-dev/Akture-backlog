@@ -50,7 +50,7 @@ const VpAthlete = () => {
           <div className='relative w-full h-[600px] order-1 lg:order-2 flex flex-col justify-center'>
             <div className='space-y-10'>
               {/* Main Title - Updated styling to match VpCoach */}
-              <h2 className='text-4xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-gray-900 leading-tight tracking-widest'>
+              <h2 className='text-5xl lg:text-7xl font-bold text-gray-900 leading-tight tracking-widest'>
                 Why Athletes Choose
                 <br />
                 <span className='text-red-600'>Akture?</span>

@@ -54,7 +54,7 @@ const SubscribeSection = () => {
                 </svg>
               </div>
               <h3 className='text-xl font-semibold mb-2'>Live Streaming</h3>
-              <p className='text-gray-600'>
+              <p className='text-gray-600 tracking-wide'>
                 Stream your games live and connect with fans worldwide
               </p>
             </div>
@@ -76,7 +76,7 @@ const SubscribeSection = () => {
                 </svg>
               </div>
               <h3 className='text-xl font-semibold mb-2'>Analytics</h3>
-              <p className='text-gray-600'>
+              <p className='text-gray-600 tracking-wide'>
                 Track performance metrics and improve your game
               </p>
             </div>
@@ -98,7 +98,7 @@ const SubscribeSection = () => {
                 </svg>
               </div>
               <h3 className='text-xl font-semibold mb-2'>Community</h3>
-              <p className='text-gray-600'>
+              <p className='text-gray-600 tracking-wide'>
                 Connect with athletes and grow your network
               </p>
             </div>
@@ -109,21 +109,24 @@ const SubscribeSection = () => {
             <div className='max-w-xl mx-auto'>
               <form
                 onSubmit={handleSubmit}
-                className='flex flex-col sm:flex-row gap-4'
+                className='flex flex-col md:flex-row   gap-4'
               >
                 <input
                   type='email'
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder='Enter your email'
-                  className='flex-1 px-6 py-4 rounded-full border border-gray-300 focus:ring-2 focus:ring-red-500 focus:border-transparent'
+                  className='flex-1 px-6 py-4 rounded-md border w-full border-gray-300 focus:ring-2 focus:ring-red-500 focus:border-transparent'
                   required
                 />
                 <button
                   type='submit'
-                  className='px-8 py-4 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-full transition-colors duration-200 shadow-lg hover:shadow-xl'
+                  className='px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg transition-colors duration-200 tracking-widest whitespace-nowrap shadow-md hover:shadow-lg text-xl'
                 >
-                  <span className='tracking-widest text-xl'>Get Started</span>
+                  <span className='tracking-widest leading-4 whitespace-nowrap '>
+                    {" "}
+                    Get Started{" "}
+                  </span>
                 </button>
               </form>
             </div>

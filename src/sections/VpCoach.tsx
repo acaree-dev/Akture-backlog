@@ -40,13 +40,11 @@ const VpCoach = () => {
     <section className='relative bg-white py-20 w-full overflow-hidden mt-[10rem] mb-[10rem]'>
       {/* Changed container width and padding */}
       <div className='w-[90%] mx-auto'>
-        {/* Updated grid to ensure exact 50% width distribution */}
         <div className='grid lg:grid-cols-2 gap-[5%] items-center'>
           {/* Left Content - Value Proposition */}
           <div className='w-full space-y-10'>
-            {/* Removed max-w-xl to allow full 50% width */}
-            {/* Main Title - Improved spacing and responsive sizing */}
-            <h2 className='text-4xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-gray-900 leading-tight tracking-widest'>
+            {/* Main Title   */}
+            <h2 className='text-5xl lg:text-7xl font-extrabold text-gray-900 leading-tight tracking-widest'>
               Elevate Your
               <br />
               <span className='text-red-600'>Coaching Impact</span>
