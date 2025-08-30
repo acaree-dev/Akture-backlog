@@ -16,7 +16,7 @@ const SubscribeSection = () => {
   return (
     <section
       id='subscribe-section'
-      className='relative py-16 md:py-24 bg-gradient-to-b from-white to-gray-50'
+      className='relative py-16 md:py-24 bg-gradient-to-b from-white to-gray-50 mb-[10rem]'
     >
       {/* Background Elements */}
       <div className='absolute inset-0 overflow-hidden'>
@@ -123,7 +123,7 @@ const SubscribeSection = () => {
                   type='submit'
                   className='px-8 py-4 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-full transition-colors duration-200 shadow-lg hover:shadow-xl'
                 >
-                  Get Started
+                  <span className='tracking-widest text-xl'>Get Started</span>
                 </button>
               </form>
             </div>
