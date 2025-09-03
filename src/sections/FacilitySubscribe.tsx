@@ -124,16 +124,7 @@ const FacilitySubscribe = () => {
                 </h3>
                 <form onSubmit={handleSubmit} className='space-y-4'>
                   <div className='flex flex-col justify-center items-center gap-4'>
-                    <div className='flex-1 w-full'>
-                      <input
-                        type='email'
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        placeholder='Enter your email'
-                        className='w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-red-500 focus:border-transparent'
-                        required
-                      />
-                    </div>
+                    <div className='flex-1 w-full'></div>
                     <div>
                       {" "}
                       <button

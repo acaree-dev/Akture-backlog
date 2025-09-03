@@ -5,11 +5,11 @@ import VideoShowcase from "@/sections/VideoShowcase"; // Add this import
 import DownloadApp from "@/sections/DownloadApp";
 import Footer from "@/sections/Footer";
 import FacilitySubscribe from "@/sections/FacilitySubscribe";
-import VpOwner from "@/sections/VpCoach";
+
 import VpCoach from "@/sections/VpCoach";
 import VpAthlete from "@/sections/VpAthlete";
 import SubscribeSection from "@/sections/SubscribeSection";
-
+import LiveSportsBroadcast from "@/sections/LiveSportsBroadcast";
 export default function Home() {
   return (
     <>
@@ -17,14 +17,14 @@ export default function Home() {
         <TrendingPromo />
         <Header />
         <AktureCarousel />
-        <VpCoach />
         <VpAthlete />
-        <SubscribeSection />
         <VideoShowcase /> {/* Add this component above DownloadApp */}
+        <SubscribeSection />
+        <FacilitySubscribe />
+        <LiveSportsBroadcast />
+        <VpCoach />
         <DownloadApp />
         <div className='mt-auto'>
-          <FacilitySubscribe />
-
           <Footer />
         </div>
       </div>
