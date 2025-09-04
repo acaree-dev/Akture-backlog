@@ -1,157 +1,86 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import {
-  Play,
-  Share2,
-  Clock,
-  Users,
-  MessageSquare,
-  Bell,
-  ExternalLink,
-  BarChart2,
-  Star,
-  Maximize,
-  Volume2,
-  Settings,
-} from "lucide-react";
+import { useState, useEffect, useCallback } from "react";
+import Image from "next/image";
+import Link from "next/link";
 import {
   FaInstagram,
   FaXTwitter,
   FaFacebookF,
   FaYoutube,
+  FaLinkedinIn,
 } from "react-icons/fa6";
-import Link from "next/link";
 
-// Mock data for sports broadcast
-const sportsData = {
-  isLive: true, // Toggle for live/upcoming state
-  matchTitle: "Texas Soccer league  Finals",
-  homeTeam: {
-    name: "Austin FC",
-    logo: "/assets/team-logo1.png",
-    score: 3,
-  },
-  awayTeam: {
-    name: "SA FC",
-    logo: "/assets/team-logo2.png",
-    score: 1,
-  },
-  matchTime: "2nd Half - 15:45", // Match time remaining
-  streamUrl: "https://www.youtube.com/watch?v=RXuJuz5fkow",
-  embedUrl: "https://www.youtube.com/embed/RXuJuz5fkow?autoplay=1&mute=0",
-  viewerCount: 12547,
-  nextMatchDate: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000), // 2 days from now
-  stats: {
-    topScorer: "D. Johnson (Austin) - 2 goals",
-    topRebounder: "T. Williams (SA) - 5 saves",
-    possession: { home: 53, away: 47 },
-    shotsOnGoal: { home: 18, away: 15 },
-  },
-  chatMessages: [
-    {
-      id: 1,
-      user: "SoccerFan23",
-      message: "That goal was incredible!",
-      timestamp: "2m ago",
-    },
-    {
-      id: 2,
-      user: "CoachK",
-      message: "Austin needs better defense",
-      timestamp: "1m ago",
-    },
-    {
-      id: 3,
-      user: "SportsAnalyst",
-      message: "Johnson is on fire tonight!",
-      timestamp: "Just now",
-    },
-  ],
-  pastGames: [
-    {
-      id: 1,
-      title: "Austin FC vs Portland Timbers",
-      result: "3-1",
-      date: "Aug 28",
-      thumbnail: "/assets/game-thumb1.jpg",
-    },
-    {
-      id: 2,
-      title: "SA FC vs Houston Dynamo",
-      result: "2-2",
-      date: "Aug 24",
-      thumbnail: "/assets/game-thumb2.jpg",
-    },
-    {
-      id: 3,
-      title: "LA Galaxy vs Austin FC",
-      result: "0-2",
-      date: "Aug 20",
-      thumbnail: "/assets/game-thumb3.jpg",
-    },
-    {
-      id: 4,
-      title: "SA FC vs Seattle Sounders",
-      result: "3-2",
-      date: "Aug 16",
-      thumbnail: "/assets/game-thumb4.jpg",
-    },
-  ],
+// Type definitions for proper TypeScript support
+type TeamInfo = {
+  name: string;
+  logo: string;
+  score: number;
+};
+
+type MatchStats = {
+  possession: [number, number]; // [team1, team2]
+  shots: [number, number];
+  shotsOnTarget: [number, number];
+  corners: [number, number];
+  fouls: [number, number];
+};
+
+type ChatMessage = {
+  id: string;
+  user: string;
+  message: string;
+  timestamp: Date;
 };
 
 const LiveSportsBroadcast = () => {
-  const [timeRemaining, setTimeRemaining] = useState({
-    days: 0,
-    hours: 0,
-    minutes: 0,
-    seconds: 0,
-  });
+  // State management
+  const [isLive, setIsLive] = useState(true);
+  const [liveViewers, setLiveViewers] = useState(1247);
+  const [chatMessages, setChatMessages] = useState<ChatMessage[]>([
+    {
+      id: "1",
+      user: "AktureFan22",
+      message: "What a game! Can't believe that save!",
+      timestamp: new Date(),
+    },
+    {
+      id: "2",
+      user: "SoccerLover",
+      message: "Austin's defense looking solid today",
+      timestamp: new Date(),
+    },
+    {
+      id: "3",
+      user: "FootballExpert",
+      message: "They need to control the midfield better",
+      timestamp: new Date(),
+    },
+  ]);
   const [chatInput, setChatInput] = useState("");
-  const [messages, setMessages] = useState(sportsData.chatMessages);
-  const [showControls, setShowControls] = useState(false);
 
-  // Calculate and update countdown timer
-  useEffect(() => {
-    if (!sportsData.isLive) {
-      const calculateTimeRemaining = () => {
-        const now = new Date();
-        const difference = sportsData.nextMatchDate.getTime() - now.getTime();
-
-        if (difference > 0) {
-          setTimeRemaining({
-            days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-            hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-            minutes: Math.floor((difference / (1000 * 60)) % 60),
-            seconds: Math.floor((difference / 1000) % 60),
-          });
-        }
-      };
-
-      calculateTimeRemaining();
-      const timer = setInterval(calculateTimeRemaining, 1000);
-
-      return () => clearInterval(timer);
-    }
-  }, []);
-
-  // Handle chat submission
-  const handleChatSubmit = (e) => {
-    e.preventDefault();
-    if (chatInput.trim() === "") return;
-
-    const newMessage = {
-      id: messages.length + 1,
-      user: "You",
-      message: chatInput,
-      timestamp: "Just now",
-    };
-
-    setMessages([...messages, newMessage]);
-    setChatInput("");
+  // Match data
+  const homeTeam: TeamInfo = {
+    name: "Austin FC",
+    logo: "/images/teams/austin-fc.svg", // Keep original path
+    score: 2,
   };
 
-  // Social media links with their respective icons and brand colors - Exact same as footer
+  const awayTeam: TeamInfo = {
+    name: "SA FC",
+    logo: "/images/teams/sa-fc.svg", // Keep original path
+    score: 1,
+  };
+
+  const matchStats: MatchStats = {
+    possession: [58, 42],
+    shots: [12, 8],
+    shotsOnTarget: [5, 3],
+    corners: [7, 4],
+    fouls: [9, 11],
+  };
+
+  // Social media links with brand colors - matching footer styling
   const socialLinks = [
     {
       icon: FaInstagram,
@@ -177,480 +106,434 @@ const LiveSportsBroadcast = () => {
       label: "Share on Facebook",
       colorClass: "text-blue-600 hover:text-blue-700",
     },
+    {
+      icon: FaLinkedinIn,
+      href: "#",
+      label: "Share on LinkedIn",
+      colorClass: "text-blue-700 hover:text-blue-800",
+    },
   ];
 
-  // Shared styling classes - Exact same as footer
+  // Shared styling classes
   const socialIconClass = "w-6 h-6 md:w-5 md:h-5";
   const socialLinkBaseClass =
     "hover:scale-125 transition-all duration-300 ease-in-out";
 
+  // Simulate viewer count changes
+  useEffect(() => {
+    if (!isLive) return;
+
+    const interval = setInterval(() => {
+      // Random fluctuation in viewer count for realism
+      setLiveViewers((prev) =>
+        Math.max(1000, prev + Math.floor(Math.random() * 10) - 5)
+      );
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [isLive]);
+
+  // Handle chat submission with memoization to prevent unnecessary re-renders
+  const handleChatSubmit = useCallback(
+    (e: React.FormEvent) => {
+      e.preventDefault();
+      if (!chatInput.trim()) return;
+
+      const newMessage: ChatMessage = {
+        id: Date.now().toString(),
+        user: "You",
+        message: chatInput.trim(),
+        timestamp: new Date(),
+      };
+
+      setChatMessages((prev) => [...prev, newMessage]);
+      setChatInput("");
+    },
+    [chatInput]
+  );
+
+  // Improved fallback handler for image loading errors
+  const handleImageError = (
+    e: React.SyntheticEvent<HTMLImageElement>,
+    teamName: string
+  ) => {
+    // Generate initials from team name
+    const initials = teamName
+      .split(" ")
+      .map((word) => word[0])
+      .join("")
+      .substring(0, 2)
+      .toUpperCase();
+
+    // Create SVG with team initials as fallback
+    const svgContent = `
+      <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+        <rect width="48" height="48" fill="#374151" rx="24" />
+        <text x="24" y="30" font-family="Arial" font-size="16" fill="white" text-anchor="middle">${initials}</text>
+      </svg>
+    `;
+
+    // Convert SVG to data URL
+    const svgBlob = new Blob([svgContent], { type: "image/svg+xml" });
+    const url = URL.createObjectURL(svgBlob);
+
+    e.currentTarget.src = url;
+
+    // Clean up the object URL when the component unmounts
+    return () => URL.revokeObjectURL(url);
+  };
+
   return (
     <section className='relative w-full bg-gradient-to-br from-black via-gray-900 to-black py-20 overflow-hidden'>
-      {/* Background overlay - Using a pattern instead of an image */}
-      <div className='absolute inset-0 opacity-20'>
-        <div className='w-full h-full bg-gray-900'>
-          <svg
-            xmlns='http://www.w3.org/2000/svg'
-            width='100%'
-            height='100%'
-            className='opacity-10'
-          >
-            <defs>
-              <pattern
-                id='stadium-pattern'
-                patternUnits='userSpaceOnUse'
-                width='100'
-                height='100'
-              >
-                <path
-                  d='M0 0L100 100M100 0L0 100'
-                  stroke='white'
-                  strokeWidth='1'
-                  fill='none'
-                />
-              </pattern>
-            </defs>
-            <rect width='100%' height='100%' fill='url(#stadium-pattern)' />
-          </svg>
-        </div>
-        <div className='absolute inset-0 bg-gradient-to-b from-black via-transparent to-black'></div>
-      </div>
+      <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
+        <div className='flex flex-col gap-6'>
+          {/* Section header */}
+          <div className='flex justify-between items-center'>
+            <h2 className='text-3xl md:text-4xl font-bold text-white'>
+              Live<span className='text-red-600'>Sports</span>
+            </h2>
 
-      {/* Decorative elements */}
-      <div className='absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-red-600/20 to-transparent'></div>
-      <div className='absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-red-600/20 to-transparent'></div>
-
-      <div className='container mx-auto px-4 relative z-10'>
-        {/* Hero Headline */}
-        <div className='text-center mb-12'>
-          <h2 className='text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 tracking-wide'>
-            Watch <span className='text-red-600'>Akture Sports Live</span>
-          </h2>
-          <p className='text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed'>
-            Catch the action in real-time, anytime, anywhere. Premium sports
-            streaming at your fingertips.
-          </p>
-        </div>
-
-        {/* Scoreboard */}
-        {sportsData.isLive && (
-          <div className='bg-gray-800/80 backdrop-blur-sm rounded-xl p-4 mx-auto max-w-4xl border border-gray-700/50 flex items-center justify-between'>
-            {/* Home Team */}
-            <div className='flex items-center gap-3'>
-              <div className='relative h-12 w-12 bg-green-800 rounded-full flex items-center justify-center text-white font-bold'>
-                AFC
-              </div>
-              <div className='text-center'>
-                <p className='font-bold text-white text-lg md:text-xl'>
-                  {sportsData.homeTeam.name}
-                </p>
-                <p className='text-2xl md:text-3xl font-bold text-white'>
-                  {sportsData.homeTeam.score}
-                </p>
-              </div>
-            </div>
-
-            {/* Match Info */}
-            <div className='text-center px-4'>
-              <p className='text-gray-400 text-sm'>{sportsData.matchTitle}</p>
-              <div className='flex items-center justify-center mt-1'>
-                <div className='h-2 w-2 bg-red-600 rounded-full animate-pulse mr-2'></div>
-                <p className='text-red-400 font-semibold'>
-                  {sportsData.matchTime}
-                </p>
-              </div>
-            </div>
-
-            {/* Away Team */}
-            <div className='flex items-center gap-3'>
-              <div className='text-center'>
-                <p className='font-bold text-white text-lg md:text-xl'>
-                  {sportsData.awayTeam.name}
-                </p>
-                <p className='text-2xl md:text-3xl font-bold text-white'>
-                  {sportsData.awayTeam.score}
-                </p>
-              </div>
-              <div className='relative h-12 w-12 bg-blue-800 rounded-full flex items-center justify-center text-white font-bold'>
-                SAFC
-              </div>
-            </div>
-          </div>
-        )}
-
-        <div className='grid grid-cols-1 lg:grid-cols-3 gap-8 mt-8'>
-          {/* Main Video Player Column */}
-          <div className='lg:col-span-2 space-y-6'>
-            {/* Video Player - YouTube Embed */}
-            <div className='relative aspect-video rounded-xl overflow-hidden bg-gray-900 shadow-2xl border border-gray-800'>
-              {sportsData.isLive ? (
-                // YouTube Embed
-                <div className='w-full h-full relative'>
-                  <iframe
-                    src={sportsData.embedUrl}
-                    title='Akture Sports Live Broadcast'
-                    className='absolute top-0 left-0 w-full h-full'
-                    allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
-                    allowFullScreen
-                  ></iframe>
-
-                  {/* Live Badge */}
-                  <div className='absolute top-4 left-4 z-10 flex items-center bg-red-600 rounded-full px-3 py-1 shadow-lg animate-pulse'>
-                    <div className='h-2 w-2 bg-white rounded-full mr-2'></div>
-                    <span className='text-white text-sm font-semibold tracking-wide'>
-                      LIVE
-                    </span>
-                  </div>
-
-                  {/* Viewer Count */}
-                  <div className='absolute top-4 right-4 z-10 flex items-center bg-black/60 backdrop-blur-sm rounded-full px-3 py-1'>
-                    <Users className='h-4 w-4 text-gray-300 mr-2' />
-                    <span className='text-white text-sm'>
-                      {sportsData.viewerCount.toLocaleString()}
-                    </span>
-                  </div>
+            {isLive && (
+              <div className='flex items-center gap-3'>
+                <div className='flex items-center gap-2'>
+                  <span className='relative flex h-3 w-3'>
+                    <span className='animate-ping absolute inline-flex h-full w-full rounded-full bg-red-600 opacity-75'></span>
+                    <span className='relative inline-flex rounded-full h-3 w-3 bg-red-500'></span>
+                  </span>
+                  <span className='text-red-500 font-semibold'>LIVE</span>
                 </div>
-              ) : (
-                // Coming soon placeholder
-                <div className='w-full h-full flex flex-col items-center justify-center p-8 text-center bg-gradient-to-br from-gray-800 to-gray-900'>
-                  <div className='text-red-600 text-4xl font-bold mb-6'>
-                    AKTURE
-                  </div>
-
-                  <div className='flex items-center gap-6 mb-6'>
-                    <div className='text-center'>
-                      <div className='h-16 w-16 mx-auto bg-green-800 rounded-full flex items-center justify-center text-white font-bold'>
-                        AFC
-                      </div>
-                      <p className='font-bold text-white mt-2'>
-                        {sportsData.homeTeam.name}
-                      </p>
-                    </div>
-
-                    <div className='text-2xl font-bold text-gray-400'>VS</div>
-
-                    <div className='text-center'>
-                      <div className='h-16 w-16 mx-auto bg-blue-800 rounded-full flex items-center justify-center text-white font-bold'>
-                        SAFC
-                      </div>
-                      <p className='font-bold text-white mt-2'>
-                        {sportsData.awayTeam.name}
-                      </p>
-                    </div>
-                  </div>
-
-                  <h3 className='text-2xl font-bold text-white mb-2'>
-                    Upcoming Match
-                  </h3>
-                  <p className='text-gray-400 mb-8'>
-                    {new Intl.DateTimeFormat("en-US", {
-                      weekday: "long",
-                      month: "short",
-                      day: "numeric",
-                      hour: "2-digit",
-                      minute: "2-digit",
-                    }).format(sportsData.nextMatchDate)}
-                  </p>
-
-                  {/* Countdown Timer */}
-                  <div className='flex justify-center gap-4 text-center'>
-                    <div className='bg-gray-800 p-3 rounded-lg w-20'>
-                      <div className='text-2xl font-bold text-white'>
-                        {timeRemaining.days}
-                      </div>
-                      <div className='text-xs text-gray-400 uppercase tracking-wider'>
-                        Days
-                      </div>
-                    </div>
-                    <div className='bg-gray-800 p-3 rounded-lg w-20'>
-                      <div className='text-2xl font-bold text-white'>
-                        {timeRemaining.hours}
-                      </div>
-                      <div className='text-xs text-gray-400 uppercase tracking-wider'>
-                        Hours
-                      </div>
-                    </div>
-                    <div className='bg-gray-800 p-3 rounded-lg w-20'>
-                      <div className='text-2xl font-bold text-white'>
-                        {timeRemaining.minutes}
-                      </div>
-                      <div className='text-xs text-gray-400 uppercase tracking-wider'>
-                        Mins
-                      </div>
-                    </div>
-                    <div className='bg-gray-800 p-3 rounded-lg w-20'>
-                      <div className='text-2xl font-bold text-white'>
-                        {timeRemaining.seconds}
-                      </div>
-                      <div className='text-xs text-gray-400 uppercase tracking-wider'>
-                        Secs
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              )}
-            </div>
-
-            {/* Match Details */}
-            <div className='bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 border border-gray-700/50'>
-              <div className='flex flex-col md:flex-row md:items-center justify-between gap-4'>
-                <div>
-                  <h3 className='text-2xl font-bold text-white mb-2'>
-                    {sportsData.matchTitle}
-                  </h3>
-                  {sportsData.isLive ? (
-                    <div className='flex items-center text-gray-300 mb-3'>
-                      <div className='h-2 w-2 bg-red-600 rounded-full mr-2 animate-pulse'></div>
-                      <span>Live Now - {sportsData.matchTime} remaining</span>
-                    </div>
-                  ) : (
-                    <div className='flex items-center text-gray-300 mb-3'>
-                      <Clock className='h-4 w-4 mr-2' />
-                      <span>
-                        {new Intl.DateTimeFormat("en-US", {
-                          weekday: "long",
-                          month: "short",
-                          day: "numeric",
-                          hour: "2-digit",
-                          minute: "2-digit",
-                        }).format(sportsData.nextMatchDate)}
-                      </span>
-                    </div>
-                  )}
-                </div>
-
-                <div className='flex flex-wrap gap-3 md:justify-end'>
-                  {sportsData.isLive ? (
-                    <a
-                      href={sportsData.streamUrl}
-                      target='_blank'
-                      rel='noopener noreferrer'
-                      className='bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-6 rounded-xl transition-all duration-300 flex items-center gap-2 shadow-lg hover:shadow-xl hover:translate-y-[-2px]'
-                    >
-                      <ExternalLink className='h-4 w-4' />
-                      Watch on YouTube
-                    </a>
-                  ) : (
-                    <button className='bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-6 rounded-xl transition-all duration-300 flex items-center gap-2 shadow-lg hover:shadow-xl hover:translate-y-[-2px]'>
-                      <Bell className='h-4 w-4' />
-                      Set Reminder
-                    </button>
-                  )}
-
-                  <button className='bg-gray-700 hover:bg-gray-600 text-white font-semibold py-2 px-6 rounded-xl transition-all duration-300 flex items-center gap-2'>
-                    <Share2 className='h-4 w-4' />
-                    Share
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            {/* Live Stats */}
-            {sportsData.isLive && (
-              <div className='bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 border border-gray-700/50'>
-                <h4 className='font-semibold text-white flex items-center mb-4'>
-                  <BarChart2 className='h-5 w-5 mr-2 text-red-500' />
-                  Live Match Stats
-                </h4>
-
-                <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
-                  {/* Left column stats */}
-                  <div className='space-y-5'>
-                    <div>
-                      <p className='text-gray-400 text-sm mb-1'>Top Scorer</p>
-                      <p className='text-white font-semibold flex items-center'>
-                        <Star className='h-4 w-4 text-red-500 mr-2' />
-                        {sportsData.stats.topScorer}
-                      </p>
-                    </div>
-
-                    <div>
-                      <p className='text-gray-400 text-sm mb-1'>
-                        Top Goalkeeper
-                      </p>
-                      <p className='text-white font-semibold flex items-center'>
-                        <Star className='h-4 w-4 text-red-500 mr-2' />
-                        {sportsData.stats.topRebounder}
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Right column stats */}
-                  <div className='space-y-5'>
-                    <div>
-                      <div className='flex justify-between text-sm mb-1'>
-                        <span className='text-gray-400'>Possession</span>
-                        <span className='text-white'>
-                          {sportsData.stats.possession.home}% -{" "}
-                          {sportsData.stats.possession.away}%
-                        </span>
-                      </div>
-                      <div className='h-2 bg-gray-700 rounded-full overflow-hidden'>
-                        <div
-                          className='h-full bg-red-600 rounded-full'
-                          style={{
-                            width: `${sportsData.stats.possession.home}%`,
-                          }}
-                        ></div>
-                      </div>
-                    </div>
-
-                    <div>
-                      <div className='flex justify-between text-sm mb-1'>
-                        <span className='text-gray-400'>Shots On Goal</span>
-                        <span className='text-white'>
-                          {sportsData.stats.shotsOnGoal.home} -{" "}
-                          {sportsData.stats.shotsOnGoal.away}
-                        </span>
-                      </div>
-                      <div className='flex gap-1'>
-                        {[...Array(sportsData.stats.shotsOnGoal.home)].map(
-                          (_, i) => (
-                            <div
-                              key={`home-${i}`}
-                              className='h-2 flex-1 bg-red-600 rounded-full'
-                            ></div>
-                          )
-                        )}
-                        {[...Array(sportsData.stats.shotsOnGoal.away)].map(
-                          (_, i) => (
-                            <div
-                              key={`away-${i}`}
-                              className='h-2 flex-1 bg-gray-500 rounded-full'
-                            ></div>
-                          )
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <span className='text-gray-400 text-sm'>
+                  {liveViewers.toLocaleString()} watching
+                </span>
               </div>
             )}
           </div>
 
-          {/* Sidebar - Chat & Info */}
-          <div className='space-y-6'>
-            {/* Live Chat */}
-            <div className='bg-gray-800/50 backdrop-blur-sm rounded-xl border border-gray-700/50 flex flex-col h-[500px]'>
-              <div className='p-4 border-b border-gray-700/70'>
-                <h4 className='font-semibold text-white flex items-center'>
-                  <MessageSquare className='h-4 w-4 mr-2 text-red-500' />
-                  Fan Chat
-                </h4>
+          {/* Main content grid */}
+          <div className='grid grid-cols-1 lg:grid-cols-4 gap-6'>
+            {/* Live match content - takes up 3/4 of the grid on large screens */}
+            <div className='lg:col-span-3 space-y-6'>
+              {/* Scoreboard */}
+              <div className='bg-gray-800/70 backdrop-blur-sm rounded-xl p-4 flex items-center justify-between'>
+                <div className='flex items-center gap-3'>
+                  <div className='relative h-12 w-12 overflow-hidden'>
+                    <Image
+                      src={homeTeam.logo}
+                      alt={homeTeam.name}
+                      width={48}
+                      height={48}
+                      onError={(e) => handleImageError(e, homeTeam.name)}
+                      className='object-contain'
+                    />
+                  </div>
+                  <span className='text-white font-semibold'>
+                    {homeTeam.name}
+                  </span>
+                </div>
+
+                <div className='px-6 py-3 bg-gray-900/80 rounded-lg flex items-center gap-3'>
+                  <span className='text-white text-2xl font-bold'>
+                    {homeTeam.score}
+                  </span>
+                  <span className='text-gray-400'>-</span>
+                  <span className='text-white text-2xl font-bold'>
+                    {awayTeam.score}
+                  </span>
+                </div>
+
+                <div className='flex items-center gap-3'>
+                  <span className='text-white font-semibold'>
+                    {awayTeam.name}
+                  </span>
+                  <div className='relative h-12 w-12 overflow-hidden'>
+                    <Image
+                      src={awayTeam.logo}
+                      alt={awayTeam.name}
+                      width={48}
+                      height={48}
+                      onError={(e) => handleImageError(e, awayTeam.name)}
+                      className='object-contain'
+                    />
+                  </div>
+                </div>
               </div>
 
-              <div className='flex-1 overflow-y-auto p-4 space-y-4'>
-                {messages.map((msg) => (
-                  <div key={msg.id} className='flex gap-3'>
-                    <div className='w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center text-white text-xs font-bold flex-shrink-0'>
-                      {msg.user.charAt(0)}
+              {/* Video player */}
+              <div className='relative aspect-video w-full overflow-hidden rounded-xl bg-gray-900'>
+                {isLive ? (
+                  <iframe
+                    className='absolute inset-0 w-full h-full'
+                    src='https://www.youtube.com/embed/RXuJuz5fkow?autoplay=1&mute=1'
+                    title='Live match stream'
+                    frameBorder='0'
+                    allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+                    allowFullScreen
+                  ></iframe>
+                ) : (
+                  <div className='flex items-center justify-center h-full'>
+                    <div className='text-center'>
+                      <p className='text-gray-400 mb-4'>This match has ended</p>
+                      <button className='px-4 py-2 bg-red-600 hover:bg-red-700 transition-colors rounded-lg text-white font-medium'>
+                        Watch Replay
+                      </button>
                     </div>
-                    <div className='flex-1'>
-                      <div className='flex items-baseline gap-2'>
-                        <span className='font-semibold text-white'>
+                  </div>
+                )}
+              </div>
+
+              {/* Match statistics */}
+              <div className='bg-gray-800/50 backdrop-blur-sm rounded-xl p-6'>
+                <h3 className='text-xl font-semibold text-white mb-4'>
+                  Match Statistics
+                </h3>
+
+                <div className='space-y-4'>
+                  {/* Possession stat */}
+                  <div className='space-y-2'>
+                    <div className='flex justify-between text-sm'>
+                      <span className='text-white'>
+                        {matchStats.possession[0]}%
+                      </span>
+                      <span className='text-gray-400'>Possession</span>
+                      <span className='text-white'>
+                        {matchStats.possession[1]}%
+                      </span>
+                    </div>
+                    <div className='flex h-2 rounded-full overflow-hidden bg-gray-700'>
+                      <div
+                        className='bg-green-600'
+                        style={{ width: `${matchStats.possession[0]}%` }}
+                      ></div>
+                      <div
+                        className='bg-blue-600'
+                        style={{ width: `${matchStats.possession[1]}%` }}
+                      ></div>
+                    </div>
+                  </div>
+
+                  {/* Shots stat */}
+                  <div className='space-y-2'>
+                    <div className='flex justify-between text-sm'>
+                      <span className='text-white'>{matchStats.shots[0]}</span>
+                      <span className='text-gray-400'>Shots</span>
+                      <span className='text-white'>{matchStats.shots[1]}</span>
+                    </div>
+                    <div className='flex h-2 rounded-full overflow-hidden bg-gray-700'>
+                      <div
+                        className='bg-green-600'
+                        style={{
+                          width: `${
+                            (matchStats.shots[0] /
+                              (matchStats.shots[0] + matchStats.shots[1])) *
+                            100
+                          }%`,
+                        }}
+                      ></div>
+                      <div
+                        className='bg-blue-600'
+                        style={{
+                          width: `${
+                            (matchStats.shots[1] /
+                              (matchStats.shots[0] + matchStats.shots[1])) *
+                            100
+                          }%`,
+                        }}
+                      ></div>
+                    </div>
+                  </div>
+
+                  {/* Additional stats */}
+                  <div className='grid grid-cols-2 gap-4 pt-2'>
+                    <div className='flex justify-between'>
+                      <span className='text-white'>
+                        {matchStats.shotsOnTarget[0]}
+                      </span>
+                      <span className='text-gray-400'>Shots on Target</span>
+                      <span className='text-white'>
+                        {matchStats.shotsOnTarget[1]}
+                      </span>
+                    </div>
+                    <div className='flex justify-between'>
+                      <span className='text-white'>
+                        {matchStats.corners[0]}
+                      </span>
+                      <span className='text-gray-400'>Corners</span>
+                      <span className='text-white'>
+                        {matchStats.corners[1]}
+                      </span>
+                    </div>
+                    <div className='flex justify-between'>
+                      <span className='text-white'>{matchStats.fouls[0]}</span>
+                      <span className='text-gray-400'>Fouls</span>
+                      <span className='text-white'>{matchStats.fouls[1]}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Sidebar - Chat & Info */}
+            <div className='space-y-6'>
+              {/* Live Chat */}
+              <div className='bg-gray-800/50 backdrop-blur-sm rounded-xl p-4 border border-gray-700/50 flex flex-col h-[400px]'>
+                <h4 className='font-semibold text-white mb-3'>Live Chat</h4>
+
+                <div className='flex-grow overflow-y-auto space-y-3 mb-3 pr-2 custom-scrollbar'>
+                  {chatMessages.map((msg) => (
+                    <div key={msg.id} className='bg-gray-700/50 rounded-lg p-3'>
+                      <div className='flex justify-between items-center mb-1'>
+                        <span className='font-medium text-red-400'>
                           {msg.user}
                         </span>
                         <span className='text-xs text-gray-400'>
-                          {msg.timestamp}
+                          {msg.timestamp.toLocaleTimeString([], {
+                            hour: "2-digit",
+                            minute: "2-digit",
+                          })}
                         </span>
                       </div>
-                      <p className='text-gray-300 text-sm'>{msg.message}</p>
+                      <p className='text-white text-sm'>{msg.message}</p>
                     </div>
-                  </div>
-                ))}
-              </div>
+                  ))}
+                </div>
 
-              <div className='p-4 border-t border-gray-700/70'>
                 <form onSubmit={handleChatSubmit} className='flex gap-2'>
                   <input
                     type='text'
                     value={chatInput}
                     onChange={(e) => setChatInput(e.target.value)}
-                    placeholder='Join the conversation...'
-                    className='flex-1 bg-gray-700 text-white rounded-full px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-red-500'
-                    aria-label='Chat message'
+                    placeholder='Type a message...'
+                    className='flex-grow bg-gray-900 text-white rounded-lg px-3 py-2 text-sm border border-gray-700 focus:outline-none focus:border-red-500'
                   />
                   <button
                     type='submit'
-                    className='bg-red-600 hover:bg-red-700 text-white rounded-full p-2 transition-colors duration-200'
-                    aria-label='Send message'
+                    className='bg-red-600 hover:bg-red-700 text-white rounded-lg px-4 py-2 text-sm font-medium transition-colors'
                   >
-                    <svg
-                      xmlns='http://www.w3.org/2000/svg'
-                      className='h-5 w-5'
-                      viewBox='0 0 20 20'
-                      fill='currentColor'
-                    >
-                      <path d='M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z' />
-                    </svg>
+                    Send
                   </button>
                 </form>
               </div>
-            </div>
 
-            {/* Social Sharing - Updated to match footer styling */}
-            <div className='bg-gray-800/50 backdrop-blur-sm rounded-xl p-4 border border-gray-700/50'>
-              <h4 className='font-semibold text-white mb-3'>
-                Share This Match
-              </h4>
+              {/* Social Sharing */}
+              <div className='bg-gray-800/50 backdrop-blur-sm rounded-xl p-4 border border-gray-700/50'>
+                <h4 className='font-semibold text-white mb-3'>
+                  Share This Match
+                </h4>
 
-              {/* Replicated footer social icons styling */}
-              <div className='flex items-center justify-start space-x-6 md:space-x-5'>
-                {socialLinks.map(({ icon: Icon, href, label, colorClass }) => (
-                  <Link
-                    key={label}
-                    href={href}
-                    className={`${colorClass} ${socialLinkBaseClass}`}
-                    aria-label={label}
-                  >
-                    <Icon className={socialIconClass} />
-                  </Link>
-                ))}
+                {/* Social icons with styling matched from footer */}
+                <div className='flex items-center justify-start space-x-6 md:space-x-5'>
+                  {socialLinks.map(
+                    ({ icon: Icon, href, label, colorClass }) => (
+                      <Link
+                        key={label}
+                        href={href}
+                        className={`${colorClass} ${socialLinkBaseClass}`}
+                        aria-label={label}
+                      >
+                        <Icon className={socialIconClass} />
+                      </Link>
+                    )
+                  )}
+                </div>
+              </div>
+
+              {/* Upcoming Matches */}
+              <div className='bg-gray-800/50 backdrop-blur-sm rounded-xl p-4 border border-gray-700/50'>
+                <h4 className='font-semibold text-white mb-3'>
+                  Upcoming Matches
+                </h4>
+
+                <div className='space-y-3'>
+                  {[1, 2, 3].map((item) => (
+                    <Link
+                      href='#'
+                      key={`upcoming-${item}`}
+                      className='block bg-gray-700/50 hover:bg-gray-700 transition-colors p-3 rounded-lg'
+                    >
+                      <div className='flex justify-between text-sm text-gray-400 mb-2'>
+                        <span>Oct {10 + item}, 2025</span>
+                        <span>7:30 PM CT</span>
+                      </div>
+                      <div className='flex items-center justify-between'>
+                        <div className='flex items-center gap-2'>
+                          <div className='w-6 h-6 bg-gray-600 rounded-full'></div>
+                          <span className='text-white'>
+                            Team {item * 2 - 1}
+                          </span>
+                        </div>
+                        <span className='text-gray-400'>vs</span>
+                        <div className='flex items-center gap-2'>
+                          <span className='text-white'>Team {item * 2}</span>
+                          <div className='w-6 h-6 bg-gray-600 rounded-full'></div>
+                        </div>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-        {/* Highlights section - SVG placeholders instead of images */}
-        <div className='mt-20'>
-          <div className='flex items-center justify-between mb-8'>
-            <h3 className='text-2xl font-bold text-white'>
-              Watch Highlights & Replays
+          {/* Past broadcasts */}
+          <div className='mt-8'>
+            <h3 className='text-2xl font-bold text-white mb-6'>
+              Past Broadcasts
             </h3>
-            <a
-              href='#'
-              className='text-red-500 hover:text-red-400 font-semibold transition-colors duration-200'
-            >
-              View All Games
-            </a>
-          </div>
 
-          <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6'>
-            {sportsData.pastGames.map((game) => (
-              <div key={game.id} className='group relative'>
-                <div className='aspect-video rounded-lg overflow-hidden bg-gradient-to-br from-gray-800 to-gray-900 relative'>
-                  <div className='absolute inset-0 flex items-center justify-center'>
-                    <Play className='w-10 h-10 text-white/20' />
-                  </div>
-
-                  <div className='absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity duration-300'>
-                    <div className='bg-red-600/90 p-3 rounded-full transform scale-90 group-hover:scale-100 transition-transform duration-300'>
-                      <Play className='w-6 h-6 text-white' />
+            <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6'>
+              {[1, 2, 3].map((item) => (
+                <Link
+                  href='#'
+                  key={`past-${item}`}
+                  className='block bg-gray-800/40 hover:bg-gray-800/60 transition-all duration-300 rounded-xl overflow-hidden group'
+                >
+                  <div className='relative aspect-video bg-gray-900'>
+                    <div className='absolute inset-0 flex items-center justify-center'>
+                      <div className='w-16 h-16 rounded-full bg-red-600/80 flex items-center justify-center group-hover:scale-110 transition-transform'>
+                        <svg
+                          className='w-8 h-8 text-white'
+                          fill='currentColor'
+                          viewBox='0 0 24 24'
+                        >
+                          <path d='M8 5v14l11-7z' />
+                        </svg>
+                      </div>
                     </div>
                   </div>
-                  <div className='absolute bottom-2 right-2 bg-black/70 text-white text-xs px-2 py-1 rounded'>
-                    {game.result}
+
+                  <div className='p-4'>
+                    <h4 className='text-white font-semibold mb-1'>
+                      Team A vs Team B
+                    </h4>
+                    <div className='flex justify-between text-sm text-gray-400'>
+                      <span>Regular Season</span>
+                      <span>Sep {item}, 2025</span>
+                    </div>
                   </div>
-                </div>
-                <h4 className='font-semibold text-white mt-3 group-hover:text-red-500 transition-colors duration-200'>
-                  {game.title}
-                </h4>
-                <p className='text-sm text-gray-400'>{game.date}</p>
-              </div>
-            ))}
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
       </div>
+
+      {/* Custom scrollbar styles */}
+      <style jsx global>{`
+        .custom-scrollbar::-webkit-scrollbar {
+          width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+          background: rgba(31, 41, 55, 0.5);
+          border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+          background: rgba(156, 163, 175, 0.5);
+          border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+          background: rgba(156, 163, 175, 0.7);
+        }
+      `}</style>
     </section>
   );
 };
