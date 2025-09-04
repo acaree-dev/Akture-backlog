@@ -152,7 +152,7 @@ const LiveSportsBroadcast = () => {
     [chatInput]
   );
 
-  // Improved fallback handler for image loading errors
+  // fallback handler for image loading errors
   const handleImageError = (
     e: React.SyntheticEvent<HTMLImageElement>,
     teamName: string
@@ -190,7 +190,7 @@ const LiveSportsBroadcast = () => {
           {/* Section header */}
           <div className='flex justify-between items-center'>
             <h2 className='text-3xl md:text-4xl font-bold text-white'>
-              Live<span className='text-red-600'>Sports</span>
+              Live <span className='text-red-600'>Broadcast</span>
             </h2>
 
             {isLive && (
