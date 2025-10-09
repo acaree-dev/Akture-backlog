@@ -3,6 +3,7 @@ import logo from "@/assets/banner_blackred.png";
 import { SlMenu } from "react-icons/sl";
 import buttonBg from "@/assets/button-bg.jpg";
 import Image from "next/image";
+import Link from "next/link";
 
 export const Header = () => {
   return (
@@ -20,42 +21,36 @@ export const Header = () => {
           {/* navigation  menu */}
           <div className='hidden md:block relative z-10'>
             <nav className='flex gap-8  text-xl  justify-center items-center font-bold'>
-              <a
-                href='#'
+              <Link
+                href='/'
                 className='text-black text-xl  hover:text-red-700 transition-colors'
               >
                 Home
-              </a>
-              <a
-                href='#'
+              </Link>
+              <Link
+                href='/purchase'
                 className='text-black text-xl  hover:text-red-700 transition-colors'
               >
                 Purchase
-              </a>
-              <a
-                href='#'
+              </Link>
+              <Link
+                href='/live-streaming'
                 className='text-black hover:text-red-700 e transition-colors'
               >
                 Livestreams
-              </a>
-              <a
-                href='#'
-                className='text-black hover:text-red-700  transition-colors'
-              >
-                Mission
-              </a>
-              <a
-                href='#'
+              </Link>
+              <Link
+                href='/about-us'
                 className='text-black   hover:text-red-700  transition-colors'
               >
                 About
-              </a>
-              <a
-                href='#'
+              </Link>
+              <Link
+                href='/contact-us'
                 className='text-black  hover:text-red-700  transition-colors'
               >
                 Contact
-              </a>
+              </Link>
             </nav>
           </div>
           {/* Right side - Login button and menu icon */}

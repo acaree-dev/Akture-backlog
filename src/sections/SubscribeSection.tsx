@@ -15,7 +15,7 @@ const SubscribeSection = () => {
   return (
     <section
       id='subscribe-section'
-      className='relative py-16 md:py-24 bg-gradient-to-b from-white to-gray-50 mb-[10rem] mt-[75px]'
+      className='relative py-16 md:py-24 bg-gradient-to-b from-white to-gray-50'
     >
       {/* Background Elements */}
       <div className='absolute inset-0 overflow-hidden'>

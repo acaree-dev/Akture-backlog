@@ -27,7 +27,7 @@ const VpAthlete = () => {
   ];
 
   return (
-    <section className='relative bg-white py-20 px-4 sm:px-6 lg:px-8 overflow-hidden mt-[10rem] '>
+    <section className='relative bg-white py-16 md:py-24 px-4 sm:px-6 lg:px-8 overflow-hidden'>
       <div className='w-[90%] mx-auto'>
         <div className='grid lg:grid-cols-2 gap-[5%] items-center'>
           {/* Left Side - Image Container */}

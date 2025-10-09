@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function PurchasePage() {
   return (
-    <main className='min-h-screen bg-gradient-to-br from-black via-gray-900 to-black'>
+    <main className='bg-gradient-to-br from-black via-gray-900 to-black'>
       {/* Hero Section */}
       <div className='relative py-20 px-4 sm:px-6 lg:px-8'>
         <div className='max-w-7xl mx-auto'>

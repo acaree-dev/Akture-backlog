@@ -20,8 +20,8 @@ export default function Home() {
         <VpAthlete />
         <VideoShowcase /> {/* Add this component above DownloadApp */}
         <SubscribeSection />
-        <FacilitySubscribe />
         <LiveSportsBroadcast />
+        <FacilitySubscribe />
         {/* <VpCoach /> */}
         {/* <DownloadApp /> */}
         <div className='mt-auto'>
