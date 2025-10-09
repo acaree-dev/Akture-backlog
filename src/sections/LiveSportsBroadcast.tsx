@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import {
   FaInstagram,
@@ -62,13 +61,13 @@ const LiveSportsBroadcast = () => {
   // Match data
   const homeTeam: TeamInfo = {
     name: "Austin FC",
-    logo: "/images/teams/austin-fc.svg", // Keep original path
+    logo: "/images/teams/austin-fc.svg",
     score: 2,
   };
 
   const awayTeam: TeamInfo = {
     name: "SA FC",
-    logo: "/images/teams/sa-fc.svg", // Keep original path
+    logo: "/images/teams/sa-fc.svg",
     score: 1,
   };
 
@@ -152,37 +151,6 @@ const LiveSportsBroadcast = () => {
     [chatInput]
   );
 
-  // fallback handler for image loading errors
-  const handleImageError = (
-    e: React.SyntheticEvent<HTMLImageElement>,
-    teamName: string
-  ) => {
-    // Generate initials from team name
-    const initials = teamName
-      .split(" ")
-      .map((word) => word[0])
-      .join("")
-      .substring(0, 2)
-      .toUpperCase();
-
-    // Create SVG with team initials as fallback
-    const svgContent = `
-      <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
-        <rect width="48" height="48" fill="#374151" rx="24" />
-        <text x="24" y="30" font-family="Arial" font-size="16" fill="white" text-anchor="middle">${initials}</text>
-      </svg>
-    `;
-
-    // Convert SVG to data URL
-    const svgBlob = new Blob([svgContent], { type: "image/svg+xml" });
-    const url = URL.createObjectURL(svgBlob);
-
-    e.currentTarget.src = url;
-
-    // Clean up the object URL when the component unmounts
-    return () => URL.revokeObjectURL(url);
-  };
-
   return (
     <section className='relative w-full bg-gradient-to-br from-black via-gray-900 to-black py-20 overflow-hidden'>
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
@@ -210,21 +178,21 @@ const LiveSportsBroadcast = () => {
           </div>
 
           {/* Main content grid */}
-          <div className='grid grid-cols-1 lg:grid-cols-4 gap-6'>
-            {/* Live match content - takes up 3/4 of the grid on large screens */}
-            <div className='lg:col-span-3 space-y-6'>
+          <div className='flex justify-center'>
+            {/* Live match content - centered with max width */}
+            <div className='w-full max-w-5xl space-y-6'>
               {/* Scoreboard */}
               <div className='bg-gray-800/70 backdrop-blur-sm rounded-xl p-4 flex items-center justify-between'>
                 <div className='flex items-center gap-3'>
-                  <div className='relative h-12 w-12 overflow-hidden'>
-                    <Image
-                      src={homeTeam.logo}
-                      alt={homeTeam.name}
-                      width={48}
-                      height={48}
-                      onError={(e) => handleImageError(e, homeTeam.name)}
-                      className='object-contain'
-                    />
+                  <div className='relative h-12 w-12 overflow-hidden bg-gray-700 rounded-full flex items-center justify-center'>
+                    <span className='text-white text-lg font-bold'>
+                      {homeTeam.name
+                        .split(" ")
+                        .map((w) => w[0])
+                        .join("")
+                        .substring(0, 2)
+                        .toUpperCase()}
+                    </span>
                   </div>
                   <span className='text-white font-semibold'>
                     {homeTeam.name}
@@ -245,15 +213,15 @@ const LiveSportsBroadcast = () => {
                   <span className='text-white font-semibold'>
                     {awayTeam.name}
                   </span>
-                  <div className='relative h-12 w-12 overflow-hidden'>
-                    <Image
-                      src={awayTeam.logo}
-                      alt={awayTeam.name}
-                      width={48}
-                      height={48}
-                      onError={(e) => handleImageError(e, awayTeam.name)}
-                      className='object-contain'
-                    />
+                  <div className='relative h-12 w-12 overflow-hidden bg-gray-700 rounded-full flex items-center justify-center'>
+                    <span className='text-white text-lg font-bold'>
+                      {awayTeam.name
+                        .split(" ")
+                        .map((w) => w[0])
+                        .join("")
+                        .substring(0, 2)
+                        .toUpperCase()}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -282,14 +250,14 @@ const LiveSportsBroadcast = () => {
               </div>
 
               {/* Match statistics */}
-              <div className='bg-gray-800/50 backdrop-blur-sm rounded-xl p-6'>
+              {/* <div className='bg-gray-800/50 backdrop-blur-sm rounded-xl p-6'>
                 <h3 className='text-xl font-semibold text-white mb-4'>
                   Match Statistics
                 </h3>
 
-                <div className='space-y-4'>
-                  {/* Possession stat */}
-                  <div className='space-y-2'>
+                <div className='space-y-4'> */}
+              {/* Possession stat */}
+              {/* <div className='space-y-2'>
                     <div className='flex justify-between text-sm'>
                       <span className='text-white'>
                         {matchStats.possession[0]}%
@@ -309,10 +277,10 @@ const LiveSportsBroadcast = () => {
                         style={{ width: `${matchStats.possession[1]}%` }}
                       ></div>
                     </div>
-                  </div>
+                  </div> */}
 
-                  {/* Shots stat */}
-                  <div className='space-y-2'>
+              {/* Shots stat */}
+              {/* <div className='space-y-2'>
                     <div className='flex justify-between text-sm'>
                       <span className='text-white'>{matchStats.shots[0]}</span>
                       <span className='text-gray-400'>Shots</span>
@@ -340,10 +308,10 @@ const LiveSportsBroadcast = () => {
                         }}
                       ></div>
                     </div>
-                  </div>
+                  </div> */}
 
-                  {/* Additional stats */}
-                  <div className='grid grid-cols-2 gap-4 pt-2'>
+              {/* Additional stats */}
+              {/* <div className='grid grid-cols-2 gap-4 pt-2'>
                     <div className='flex justify-between'>
                       <span className='text-white'>
                         {matchStats.shotsOnTarget[0]}
@@ -367,15 +335,15 @@ const LiveSportsBroadcast = () => {
                       <span className='text-gray-400'>Fouls</span>
                       <span className='text-white'>{matchStats.fouls[1]}</span>
                     </div>
-                  </div>
-                </div>
+                  </div> */}
+              {/* </div>
               </div>
-            </div>
+            </div> */}
 
-            {/* Sidebar - Chat & Info */}
-            <div className='space-y-6'>
+              {/* Sidebar - Chat & Info */}
+              {/* <div className='space-y-6'> */}
               {/* Live Chat */}
-              <div className='bg-gray-800/50 backdrop-blur-sm rounded-xl p-4 border border-gray-700/50 flex flex-col h-[400px]'>
+              {/* <div className='bg-gray-800/50 backdrop-blur-sm rounded-xl p-4 border border-gray-700/50 flex flex-col h-[400px]'>
                 <h4 className='font-semibold text-white mb-3'>Live Chat</h4>
 
                 <div className='flex-grow overflow-y-auto space-y-3 mb-3 pr-2 custom-scrollbar'>
@@ -412,16 +380,16 @@ const LiveSportsBroadcast = () => {
                     Send
                   </button>
                 </form>
-              </div>
+              </div> */}
 
               {/* Social Sharing */}
               <div className='bg-gray-800/50 backdrop-blur-sm rounded-xl p-4 border border-gray-700/50'>
-                <h4 className='font-semibold text-white mb-3'>
+                <h4 className='font-semibold text-white mb-3 text-center'>
                   Share This Match
                 </h4>
 
                 {/* Social icons with styling matched from footer */}
-                <div className='flex items-center justify-start space-x-6 md:space-x-5'>
+                <div className='flex items-center justify-center gap-8'>
                   {socialLinks.map(
                     ({ icon: Icon, href, label, colorClass }) => (
                       <Link
@@ -438,7 +406,7 @@ const LiveSportsBroadcast = () => {
               </div>
 
               {/* Upcoming Matches */}
-              <div className='bg-gray-800/50 backdrop-blur-sm rounded-xl p-4 border border-gray-700/50'>
+              {/* <div className='bg-gray-800/50 backdrop-blur-sm rounded-xl p-4 border border-gray-700/50'>
                 <h4 className='font-semibold text-white mb-3'>
                   Upcoming Matches
                 </h4>
@@ -470,7 +438,7 @@ const LiveSportsBroadcast = () => {
                     </Link>
                   ))}
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
 

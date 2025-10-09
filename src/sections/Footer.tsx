@@ -122,13 +122,36 @@ const Footer = () => {
                 <div key={section.title} className={sectionContainerClass}>
                   <h3 className={sectionTitleClass}>{section.title}</h3>
                   <ul className='space-y-3'>
-                    {section.links.map((linkText) => (
-                      <li key={linkText}>
-                        <Link href='#' className={navLinkClass}>
-                          {linkText}
-                        </Link>
-                      </li>
-                    ))}
+                    {section.links.map((linkText) => {
+                      // Map links to their routes with URL-friendly slugs
+                      const routeMap: { [key: string]: string } = {
+                        "Live Streaming": "/live-streaming",
+                        "Video on Demand": "/video-on-demand",
+                        Monetization: "/monetization",
+                        Analytics: "/analytics",
+                        Purchase: "/purchase",
+                        "About Us": "/about-us",
+                        Careers: "/careers",
+                        Sponsorship: "/sponsorship",
+                        Partnership: "/partnership",
+                        "Contact Us": "/contact-us",
+                        Disclaimer: "/disclaimer",
+                        "Privacy Policy": "/privacy-policy",
+                        "Terms of Service": "/terms-of-service",
+                        "Cookies Policy": "/cookies-policy",
+                        "Return Policy": "/return-policy",
+                      };
+
+                      const linkHref = routeMap[linkText] || "#";
+
+                      return (
+                        <li key={linkText}>
+                          <Link href={linkHref} className={navLinkClass}>
+                            {linkText}
+                          </Link>
+                        </li>
+                      );
+                    })}
                   </ul>
                 </div>
               ))}

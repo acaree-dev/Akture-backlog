@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 
 const SubscribeSection = () => {
   const [email, setEmail] = useState("");
@@ -16,23 +15,23 @@ const SubscribeSection = () => {
   return (
     <section
       id='subscribe-section'
-      className='relative py-16 md:py-24 bg-gradient-to-b from-white to-gray-50 mb-[10rem]'
+      className='relative py-16 md:py-24 bg-gradient-to-b from-white to-gray-50 mb-[10rem] mt-[75px]'
     >
       {/* Background Elements */}
       <div className='absolute inset-0 overflow-hidden'>
-        <div className='absolute top-0 right-0 w-1/2 h-1/2 bg-red-50 rounded-full blur-3xl opacity-20 transform translate-x-1/2 -translate-y-1/2'></div>
+        <div className='absolute top-0 right-0 w-1/2 h-1/2 bg-red-50 rounded-full blur-3xl opacity-20 transform translate-x-1/2 -translate-y-full'></div>
         <div className='absolute bottom-0 left-0 w-1/2 h-1/2 bg-gray-100 rounded-full blur-3xl opacity-20 transform -translate-x-1/2 translate-y-1/2'></div>
       </div>
 
       <div className='container mx-auto px-4 sm:px-6 lg:px-8 relative'>
         <div className='max-w-4xl mx-auto text-center'>
           <h2 className='text-3xl sm:text-4xl md:text-5xl font-bold mb-6'>
-            Get the Most Out of Your{" "}
-            <span className='text-red-600'>Akture</span> Experience
+            Subscribe to Our <span className='text-red-600'>Newsletter</span>
           </h2>
           <p className='text-lg text-gray-600 mb-12 max-w-2xl mx-auto'>
-            Join thousands of sports enthusiasts who are already transforming
-            their game with Akture&#39;s premium features and exclusive content.
+            Stay updated with the latest sports streaming tips, product updates,
+            exclusive content, and industry insights delivered straight to your
+            inbox.
           </p>
 
           {/* Benefits Grid */}
@@ -49,13 +48,13 @@ const SubscribeSection = () => {
                     strokeLinecap='round'
                     strokeLinejoin='round'
                     strokeWidth={2}
-                    d='M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z'
+                    d='M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z'
                   />
                 </svg>
               </div>
-              <h3 className='text-xl font-semibold mb-2'>Live Streaming</h3>
+              <h3 className='text-xl font-semibold mb-2'>Latest Updates</h3>
               <p className='text-gray-600 tracking-wide'>
-                Stream your games live and connect with fans worldwide
+                Be the first to know about new features and platform updates
               </p>
             </div>
 
@@ -71,13 +70,13 @@ const SubscribeSection = () => {
                     strokeLinecap='round'
                     strokeLinejoin='round'
                     strokeWidth={2}
-                    d='M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z'
+                    d='M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253'
                   />
                 </svg>
               </div>
-              <h3 className='text-xl font-semibold mb-2'>Analytics</h3>
+              <h3 className='text-xl font-semibold mb-2'>Expert Tips</h3>
               <p className='text-gray-600 tracking-wide'>
-                Track performance metrics and improve your game
+                Get streaming tips, best practices, and industry insights
               </p>
             </div>
 
@@ -93,13 +92,13 @@ const SubscribeSection = () => {
                     strokeLinecap='round'
                     strokeLinejoin='round'
                     strokeWidth={2}
-                    d='M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z'
+                    d='M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7'
                   />
                 </svg>
               </div>
-              <h3 className='text-xl font-semibold mb-2'>Community</h3>
+              <h3 className='text-xl font-semibold mb-2'>Exclusive Offers</h3>
               <p className='text-gray-600 tracking-wide'>
-                Connect with athletes and grow your network
+                Receive special promotions and early access to new features
               </p>
             </div>
           </div>
@@ -125,7 +124,7 @@ const SubscribeSection = () => {
                 >
                   <span className='tracking-widest leading-4 whitespace-nowrap '>
                     {" "}
-                    Get Started{" "}
+                    Subscribe Now{" "}
                   </span>
                 </button>
               </form>
@@ -146,9 +145,11 @@ const SubscribeSection = () => {
                 />
               </svg>
               <h3 className='text-xl font-semibold text-green-800 mb-2'>
-                Thanks for subscribing!
+                Welcome to our newsletter!
               </h3>
-              <p className='text-green-700'>Check your email for next steps.</p>
+              <p className='text-green-700'>
+                Check your email to confirm your subscription.
+              </p>
             </div>
           )}
         </div>

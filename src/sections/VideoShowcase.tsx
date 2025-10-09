@@ -155,7 +155,7 @@ const VideoShowcase = () => {
                         height={150}
                         className='w-full h-full object-cover transition-transform duration-300 group-hover:scale-105'
                         style={{ width: "100%", height: "100%" }}
-                        unoptimized
+                        loading='lazy'
                       />
 
                       {/* Overlay */}

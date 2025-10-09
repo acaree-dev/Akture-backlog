@@ -6,10 +6,10 @@ import Image from "next/image";
 
 export const Header = () => {
   return (
-    <header className='py-4 border-b border-white/15 md:border-none mx-2 mt-8'>
-      <div className='container mx-auto px-4'>
+    <header className='py-4 border-b border-white/15 md:border-none mt-8'>
+      <div className='w-full px-4'>
         {/* subcontainer for header content */}
-        <div className='flex justify-between items-center border border-white/15 py-1 px-2 rounded-2xl max-w-7xl mx-auto mt-4 fixed top-8 left-1/2 transform -translate-x-1/2 w-[calc(100%-2rem)] z-50 backdrop-blur-2xl bg-gradient-to-r from-white/20 via-white/10 to-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.4)] backdrop-saturate-200 before:absolute before:inset-0 before:rounded-2xl before:border before:border-white/40 before:bg-gradient-to-br before:from-white/30 before:to-transparent before:backdrop-blur-xl before:-z-10'>
+        <div className='flex justify-between items-center border border-white/15 py-1 px-2 rounded-2xl mx-auto mt-4 fixed top-8 left-1/2 transform -translate-x-1/2 w-[calc(100%-1rem)] md:w-[calc(100%-2rem)] md:max-w-7xl z-50 backdrop-blur-2xl bg-gradient-to-r from-white/20 via-white/10 to-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.4)] backdrop-saturate-200 before:absolute before:inset-0 before:rounded-2xl before:border before:border-white/40 before:bg-gradient-to-br before:from-white/30 before:to-transparent before:backdrop-blur-xl before:-z-10'>
           <div className='relative z-10 flex flex-col items-center justify-center gap-2'>
             {/* <AktureLogo className='h-[4rem] w-auto' /> */}
             {/* <span className='text-4xl font-extrabold text-black ml-2 font-teko tracking-wider transform -skew-x-12 inline-block'>

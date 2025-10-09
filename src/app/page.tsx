@@ -22,8 +22,8 @@ export default function Home() {
         <SubscribeSection />
         <FacilitySubscribe />
         <LiveSportsBroadcast />
-        <VpCoach />
-        <DownloadApp />
+        {/* <VpCoach /> */}
+        {/* <DownloadApp /> */}
         <div className='mt-auto'>
           <Footer />
         </div>
